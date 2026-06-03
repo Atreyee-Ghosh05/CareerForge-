@@ -9,7 +9,6 @@ export const createPortfolio = asyncHandler(async (req, res, next) => {
   const { username, theme } = req.body;
   const userId = req.user._id;
 
-  // Check if portfolio already exists
   let portfolio = await Portfolio.findOne({ userId });
   if (portfolio) {
     return next(new ErrorHandler('Portfolio already exists for this user', 400));
@@ -54,7 +53,6 @@ export const getPortfolioByUsername = asyncHandler(async (req, res, next) => {
     return next(new ErrorHandler(ERROR_MESSAGES.NOT_FOUND, 404));
   }
 
-  // Increment view count
   portfolio.viewCount += 1;
   await portfolio.save();
 

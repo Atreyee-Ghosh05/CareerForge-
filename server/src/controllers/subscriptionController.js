@@ -61,7 +61,6 @@ export const upgradeSubscription = asyncHandler(async (req, res, next) => {
     return next(new ErrorHandler(ERROR_MESSAGES.NOT_FOUND, 404));
   }
 
-  // Update user subscription
   user.subscription.plan = planName;
   user.subscription.status = 'active';
   user.subscription.startDate = new Date();
@@ -76,7 +75,6 @@ export const upgradeSubscription = asyncHandler(async (req, res, next) => {
 
   await user.save();
 
-  // Update subscription record
   const subscription = await Subscription.findOneAndUpdate(
     { userId },
     {
@@ -89,7 +87,6 @@ export const upgradeSubscription = asyncHandler(async (req, res, next) => {
     { new: true }
   );
 
-  // Send confirmation email
   await sendSubscriptionConfirmation(user, plan);
 
   res.status(200).json({
@@ -106,14 +103,12 @@ export const cancelSubscription = asyncHandler(async (req, res, next) => {
 
   const user = await User.findById(userId);
 
-  // Downgrade to free plan
   user.subscription.plan = 'free';
   user.subscription.status = 'cancelled';
   user.limits = PLAN_FEATURES.free;
 
   await user.save();
 
-  // Update subscription record
   const subscription = await Subscription.findOneAndUpdate(
     { userId },
     {
