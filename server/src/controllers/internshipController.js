@@ -3,7 +3,6 @@ import asyncHandler from '../utils/asyncHandler.js';
 import ErrorHandler from '../utils/errorHandler.js';
 import { SUCCESS_MESSAGES, ERROR_MESSAGES } from '../utils/constants.js';
 
-// Create Internship
 export const createInternship = asyncHandler(async (req, res, next) => {
   const { company, role, status, startDate, endDate, duration, location, stipend, jobUrl, description, notes } = req.body;
   const userId = req.user._id;
@@ -30,7 +29,6 @@ export const createInternship = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Get All Internships
 export const getAllInternships = asyncHandler(async (req, res, next) => {
   const userId = req.user._id;
   const { status, company } = req.query;
@@ -48,7 +46,6 @@ export const getAllInternships = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Get Internship by ID
 export const getInternshipById = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const userId = req.user._id;
@@ -65,7 +62,6 @@ export const getInternshipById = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Update Internship
 export const updateInternship = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const userId = req.user._id;
@@ -88,7 +84,6 @@ export const updateInternship = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Delete Internship
 export const deleteInternship = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const userId = req.user._id;
@@ -107,7 +102,6 @@ export const deleteInternship = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Get Internship Statistics
 export const getInternshipStats = asyncHandler(async (req, res, next) => {
   const userId = req.user._id;
 
